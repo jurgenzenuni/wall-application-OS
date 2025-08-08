@@ -5,6 +5,7 @@ I need a skilled Python developer to create an Wallpaper image sharing platform 
 
 User Account Management:
 - Account creation and basic profile customization (name, bio)
+- Custom User "Folders", showcasing images the user uploaded and saved.
 
 Image Sharing:
 - Ability to upload images from device
@@ -22,3 +23,6 @@ Ideal Skills and Experience:
 - UI/UX design skills are a plus for better user experience
 
 Please provide examples of similar work done.
+
+Contact me Below 
+https://www.reddit.com/user/One_Addendum2127/
