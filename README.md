@@ -1,6 +1,7 @@
 # wall-application-OS
 
 I need a skilled Python developer to create an Wallpaper image sharing platform with the following key features:
+- Python Mandatory, not interested in React or other frameworks.
 
 User Account Management:
 - Account creation and basic profile customization (name, bio)
