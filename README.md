@@ -1,28 +1,41 @@
-# wall-application-OS
+# Wallify – AI-Powered Wallpaper Sharing Platform
 
-I need a skilled Python developer to create an Wallpaper image sharing platform with the following key features:
-- Python Mandatory, not interested in React or other frameworks.
+> **Freelance Project:** Built for a client as a custom wallpaper sharing platform with AI generation features, AWS S3 storage, and premium subscription capabilities.
 
-User Account Management:
-- Account creation and basic profile customization (name, bio)
-- Custom User "Folders", showcasing images the user uploaded and saved.
+## Key Features
 
-Image Sharing:
-- Ability to upload images from device
+### **User Accounts**
+- Secure account creation, login, and logout  
+- Profile customization (username, profile picture)  
+- Personal “Folders” to organize uploaded and saved images  
 
-AI Features:
-- Would be nice if you could implement the ability to generate AI Images using some sort of library in either landscape or portrait sizes
+### **Image Upload & Management**
+- Upload images directly from your device  
+- Store images in **AWS S3** for reliable, scalable hosting  
+- Automatic keyword-based search for images  
 
-Image Viewing:
-- Categorization of images into albums or categories
+### **AI Image Generation**
+- Integrated **ByteDance Seedream3 AI** to generate wallpapers in portrait or landscape sizes  
+- AI-generated results can be instantly saved or downloaded  
 
-Ideal Skills and Experience:
-- Proficiency in Python and web development
-- Experience with SQL database management
-- Knowledge of user authentication and image upload functionalities
-- UI/UX design skills are a plus for better user experience
+### **Image Browsing & Search**
+- Categorization by albums & keywords  
+- Search bar with autocomplete for faster results  
+- “Top 10 Search Terms” horizontal scroll section for trending wallpapers  
 
-Please provide examples of similar work done.
+### **Premium Services**
+- Stripe-powered subscription for premium features (higher-resolution downloads, exclusive AI generation styles)  
 
-Contact me Below 
-https://www.reddit.com/user/One_Addendum2127/
+### **Tech Stack**
+- **Backend:** Python, Django  
+- **Database:** PostgreSQL with indexing for optimized queries  
+- **Storage:** AWS S3  
+- **AI:** ByteDance Seedream3 API integration  
+- **Payments:** Stripe API  
+- **Frontend:** HTML, CSS, Bootstrap  
+
+### **Notable Achievements**
+- Managed **30,000+ image uploads** with real-time search and retrieval  
+- Reduced query times via normalization and indexing  
+- Mobile-responsive, user-friendly interface
+
