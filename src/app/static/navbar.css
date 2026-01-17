@@ -1,13 +1,12 @@
 /* Base navbar styles */
 .navbar {
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
   transition: all 0.3s ease;
-  /* background set by glass-nav when present */
   position: fixed;
   width: 100%;
   z-index: 1000;
-  min-height: 60px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 70px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
 /* Homepage-specific navbar style */
@@ -24,39 +23,53 @@
 /* Default nav links (dark) */
 .nav-link {
   position: relative;
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: rgba(0, 0, 0, 0.65) !important;
   font-weight: 500;
-  padding: 0.5rem 1rem !important;
-  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.25rem !important;
+  transition: color 0.2s ease;
+  letter-spacing: 0.01em;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+
 .nav-link.active {
-  color: rgba(0, 0, 0, 1) !important;
+  color: #000 !important;
+  font-weight: 600;
 }
 
 /* Homepage-specific nav links (light) */
 .homepage-navbar .nav-link {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: rgba(255, 255, 255, 0.75) !important;
 }
 
-.homepage-navbar .nav-link:hover,
-.homepage-navbar .nav-link.active {
+.homepage-navbar .nav-link:hover {
   color: rgba(255, 255, 255, 1) !important;
 }
+
+.homepage-navbar .nav-link.active {
+  color: #fff !important;
+}
+
 .homepage-navbar .navbar-brand-wallify {
   color: rgb(255, 255, 255);
 }
 
 /* Nav links scrolled state */
 .navbar-scrolled .nav-link {
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: rgba(0, 0, 0, 0.65) !important;
 }
 
-.navbar-scrolled .nav-link:hover,
-.navbar-scrolled .nav-link.active {
-  color: rgba(0, 0, 0, 1) !important;
+.navbar-scrolled .nav-link:hover {
+  color: rgba(0, 0, 0, 0.9) !important;
 }
+
+.navbar-scrolled .nav-link.active {
+  color: #000 !important;
+}
+
 .navbar-scrolled .hamburger-menu span {
   background-color: rgb(0, 0, 0) !important;
 }
@@ -66,90 +79,117 @@
   background: #000000;
   border: 2px solid #000000;
 }
+
 /* Underline animation for nav links - Only on desktop */
 @media (min-width: 992px) {
+  .navbar-nav {
+    gap: 0.25rem;
+  }
+  
+  .nav-link {
+    border-radius: 8px;
+  }
+  
+  .nav-link:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+  
+  .nav-link.active {
+    background: rgba(0, 0, 0, 0.06);
+  }
+  
   .nav-link::after {
     content: "";
     position: absolute;
     width: 0;
-    height: 3px;
-    bottom: 0;
+    height: 2px;
+    bottom: 6px;
     left: 50%;
-    background-color: rgba(0, 0, 0, 0.7); /* Default dark underline */
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-    max-width: 80%;
+    background-color: #55bcc9;
+    transition: width 0.25s ease, left 0.25s ease;
+    border-radius: 1px;
   }
 
-  .nav-link:hover::after,
+  .nav-link:hover::after {
+    width: calc(100% - 2.5rem);
+    left: 1.25rem;
+  }
+  
   .nav-link.active::after {
-    width: 80%;
-    background-color: rgba(
-      0,
-      0,
-      0,
-      1
-    ); /* Default dark underline on hover/active */
+    width: calc(100% - 2.5rem);
+    left: 1.25rem;
+    background-color: #55bcc9;
   }
 
-  /* Homepage-specific light underline */
+  /* Homepage-specific styles */
+  .homepage-navbar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .homepage-navbar .nav-link.active {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  
   .homepage-navbar .nav-link::after {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: #55bcc9;
   }
 
-  .homepage-navbar .nav-link:hover::after,
-  .homepage-navbar .nav-link.active::after {
-    background-color: rgba(255, 255, 255, 1);
+  /* Scrolled state */
+  .navbar-scrolled .nav-link:hover {
+    background: rgba(0, 0, 0, 0.04);
   }
-
-  /* Scrolled state - always dark underline */
+  
+  .navbar-scrolled .nav-link.active {
+    background: rgba(0, 0, 0, 0.06);
+  }
+  
   .navbar-scrolled .nav-link::after {
-    background-color: rgba(0, 0, 0, 0.7) !important;
-  }
-
-  .navbar-scrolled .nav-link:hover::after,
-  .navbar-scrolled .nav-link.active::after {
-    background-color: rgba(0, 0, 0, 1) !important;
+    background-color: #55bcc9;
   }
 }
+
 .btn-auth:hover {
   background: #55bcc9;
   border-color: #55bcc9;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   color: white;
 }
+
 /* Auth buttons default (dark) */
 .btn-outline-auth {
   color: #000000;
-  border: 3px solid #000000;
+  border: 2px solid rgba(0, 0, 0, 0.2);
   background: transparent;
 }
 
 /* Homepage auth buttons (light) */
 .homepage-navbar .btn-outline-auth {
   color: white;
-  border: 3px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.4);
 }
 
 .btn-outline-auth:hover {
   color: white;
   background: #55bcc9;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: #55bcc9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
 /* Auth buttons styling */
 .auth-buttons .btn {
-  padding: 0.5rem 1.5rem;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
 /* Auth buttons - scrolled state mode change */
 .navbar-scrolled .btn-outline-auth {
   color: #000000;
-  border: 3px solid #000000;
+  border: 2px solid rgba(0, 0, 0, 0.2);
   background: transparent;
 }
 

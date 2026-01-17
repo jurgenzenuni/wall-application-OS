@@ -11,160 +11,440 @@ Homepage
 {% endblock extra_css %}
 
 {% block content %}
-<!-- Hero Carousel -->
-<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+<!-- Modern Hero Section -->
+<section class="hero-section">
+    <!-- Animated background with multiple images -->
+    <div class="hero-bg">
+        <img src="{% static 'images/bgnew3.jpg' %}" class="hero-bg-image active" alt="Hero Background">
+        <img src="{% static 'images/1337547.png' %}" class="hero-bg-image" alt="Hero Background 2">
+        <img src="{% static 'images/home-hero-2.jpg' %}" class="hero-bg-image" alt="Hero Background 3">
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-noise"></div>
+    </div>
+    
+    <!-- Floating orbs for visual interest -->
+    <div class="hero-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{% static 'images/bgnew3.jpg' %}" class="d-block w-100" alt="Hero 1">
-            <div class="carousel-caption text-start">
-                <h1>Explore Our Image Gallery</h1>
-                <p>Search our vast collection of images and unique art.
-                    Find wallpapers for all your devices, and contribute your own artwork for others to view and share.
-                </p>
-                <p><a class="btn btn-auth" href="{% url 'gallery' %}">View Gallery</a></p>
-            </div>
+    <!-- Main hero content -->
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>AI-Powered Image Platform</span>
         </div>
-        <div class="carousel-item">
-            <img src="{% static 'images/1337547.png' %}" class="d-block w-100" alt="Hero 2">
-            <div class="carousel-caption">
-                <h1>Get to Know Us</h1>
-                <p>Discover the story behind our journey and the values that drive us forward.</p>
-                <p><a class="btn btn-auth" href="{% url 'about' %}">Learn more</a></p>
-            </div>
+        
+        <h1 class="hero-title">
+            <span class="title-line">Discover & Create</span>
+            <span class="title-line title-gradient">Stunning Visuals</span>
+        </h1>
+        
+        <p class="hero-description">
+            Explore our curated gallery of wallpapers and unique art. Generate custom AI images 
+            and share your creativity with a global community.
+        </p>
+        
+        <div class="hero-cta">
+            <a href="{% url 'gallery' %}" class="btn btn-hero-primary">
+                <span>Explore Gallery</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+            <a href="{% url 'generate_image' %}" class="btn btn-hero-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                <span>Generate with AI</span>
+            </a>
         </div>
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
-<!-- START THE FEATURETTES -->
-<div class="container">
-    <hr class="featurette-divider">
-
-    <div class="container mt-5">
-        <div class="row section">
-            <!-- Text and Button -->
-            <div class="col-lg-5 mb-4 my-lg-auto content">
-                <h1 class="font-weight-bold mb-3">Free AI Image Generation</h1>
-                <p class="mb-4">
-                    Using Bytedance Hyper Flux you can generate your own custom AI images. Users can upload the image to
-                    our
-                    public database.
-                </p>
-                <a href="{% url 'generate_image' %}" class="btn btn-auth btn-feature">Generate Now</a>
+        
+        <!-- Stats bar -->
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number" data-count="35000">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Images</span>
             </div>
-            <!-- Image -->
-            <div class="col-lg-7 mb-1">
-                <img src="{% static 'images/cardimg5.jpg' %}" alt="OpenAI Image" class="image w-100"
-                    style="height: 600px; object-fit: cover;">
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number" data-count="500">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Creators</span>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <hr class="featurette-divider">
-
-    <div class="container my-5">
-        <div class="row section">
-            <!-- Image -->
-            <div class="col-lg-7 mb-3">
-                <img src="{% static 'images/cardai3.jpg' %}" alt="Gallery Image" class="image w-100"
-                    style="height: 600px; object-fit: cover;">
-            </div>
-            <!-- Text and Button -->
-            <div class="col-lg-5 mb-4 my-lg-auto content">
-                <h1 class="font-weight-bold mb-3">Explore, Dream, Discover</h1>
-                <p class="mb-4">
-                    Discover new horizons, dream big, and make unforgettable memories. Become a member today.
-                </p>
-                <button class="btn btn-auth btn-feature" data-bs-toggle="modal" data-bs-target="#registerModal">Sign up
-                    Today</button>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number" data-count="50000">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Downloads</span>
             </div>
         </div>
     </div>
-    <hr class="featurette-divider">
-</div>
-<!-- Pricing Section -->
-<div class="container my-5">
-    <section id="pricing" class="pricing-section section">
-        <div class="text-center mb-4">
-            <h2 class="pricing-title">Choose your plan</h2>
-            <p class="text-muted">Simple pricing for creators</p>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+        </div>
+        <span>Scroll to explore</span>
+    </div>
+</section>
+
+<!-- =============================================
+     MODERN FEATURES BENTO GRID
+     ============================================= -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Features</span>
+            <h2 class="section-title">Everything you need to <span class="text-gradient">create & discover</span></h2>
+            <p class="section-subtitle">Powerful tools and a vibrant community at your fingertips</p>
         </div>
 
-        <div class="row g-4 justify-content-center">
-            <!-- Free Plan -->
-            <div class="col-12 col-sm-12 col-md-5 col-lg-4">
-                <div class="pricing-card">
-                    <div class="card-body p-4">
-                        <h3 class="plan-name">Free</h3>
-                        <div class="price"><span class="amount">$0</span><span class="period">/month</span></div>
-                        <p class="subtitle">3 AI generations per day</p>
-                        <ul class="features">
-                            <li><i class="fa-regular fa-circle-check"></i> Access to gallery</li>
-                            <li><i class="fa-regular fa-circle-check"></i> Upload and share images</li>
-                            <li><i class="fa-regular fa-circle-check"></i> Community forums</li>
-                        </ul>
-                        <div class="d-grid mt-3">
-                            {% if is_premium %}
-                            <a href="{% url 'generate_image' %}" class="btn btn-outline-auth">Keep creating</a>
-                            {% else %}
-                            {% if username %}
-                            <a href="{% url 'generate_image' %}" class="btn btn-outline-auth">Start generating</a>
-                            {% else %}
-                            <button class="btn btn-outline-auth" data-bs-toggle="modal"
-                                data-bs-target="#registerModal">Get started</button>
-                            {% endif %}
-                            {% endif %}
-                        </div>
+        <div class="bento-grid">
+            <!-- Large Feature Card - AI Generation -->
+            <div class="bento-card bento-large feature-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
                     </div>
+                    <h3 class="card-title">AI Image Generation</h3>
+                    <p class="card-description">Create stunning, unique images using cutting-edge Bytedance Hyper Flux AI technology. Transform your ideas into visual masterpieces in seconds.</p>
+                    <a href="{% url 'generate_image' %}" class="card-link">
+                        <span>Start Creating</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="card-visual">
+                    <img src="{% static 'images/cardimg5.jpg' %}" alt="AI Generation">
+                </div>
+            </div>
+
+            <!-- Medium Card - Gallery -->
+            <div class="bento-card bento-medium feature-card">
+                <div class="card-content">
+                    <div class="card-icon icon-purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Vast Gallery</h3>
+                    <p class="card-description">Browse 35,000+ curated wallpapers and artworks from creators worldwide.</p>
+                    <a href="{% url 'gallery' %}" class="card-link">
+                        <span>Explore</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="card-bg-pattern"></div>
+            </div>
+
+            <!-- Small Card - Community -->
+            <div class="bento-card bento-small feature-card">
+                <div class="card-content">
+                    <div class="card-icon icon-pink">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Community</h3>
+                    <p class="card-description">Join 500+ creators sharing their work.</p>
+                </div>
+            </div>
+
+            <!-- Small Card - Downloads -->
+            <div class="bento-card bento-small feature-card">
+                <div class="card-content">
+                    <div class="card-icon icon-green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Free Downloads</h3>
+                    <p class="card-description">Download any image for free, forever.</p>
+                </div>
+            </div>
+
+            <!-- Wide Card - Share -->
+            <div class="bento-card bento-wide feature-card">
+                <div class="card-content">
+                    <div class="card-icon icon-orange">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                    </div>
+                    <div class="card-text">
+                        <h3 class="card-title">Share Your Creations</h3>
+                        <p class="card-description">Upload your artwork and AI generations to inspire others. Build your portfolio and get discovered.</p>
+                    </div>
+                    <button class="card-cta" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        Join Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============================================
+     WHY CHOOSE US SECTION
+     ============================================= -->
+<section class="why-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Why Wallify</span>
+            <h2 class="section-title">Built for creators, <span class="text-gradient">by creators</span></h2>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <h4>Lightning Fast</h4>
+                <p>AI generations in seconds, not minutes. Optimized for speed without sacrificing quality.</p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <h4>Privacy First</h4>
+                <p>Your creations are yours. We never use your images for training without consent.</p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+                <h4>Affordable</h4>
+                <p>Free tier with generous limits. Premium for just $2.99/mo for unlimited access.</p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                        <line x1="4" y1="22" x2="4" y2="15"></line>
+                    </svg>
+                </div>
+                <h4>High Quality</h4>
+                <p>State-of-the-art AI models delivering stunning 4K resolution outputs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============================================
+     TECH STACK SECTION
+     ============================================= -->
+<section class="tech-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Powered By</span>
+            <h2 class="section-title">Built with modern <span class="text-gradient">technology</span></h2>
+            <p class="section-subtitle">Reliable, fast, and scalable infrastructure</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fab fa-python"></i>
+                </div>
+                <span class="tech-name">Python</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <span class="tech-name">Django</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <span class="tech-name">PostgreSQL</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <span class="tech-name">Neon</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fab fa-aws"></i>
+                </div>
+                <span class="tech-name">AWS S3</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span class="tech-name">Replicate AI</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============================================
+     MODERN PRICING SECTION
+     ============================================= -->
+<section class="pricing-section-new">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Pricing</span>
+            <h2 class="section-title">Simple, transparent <span class="text-gradient">pricing</span></h2>
+            <p class="section-subtitle">Start free, upgrade when you need more power</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="pricing-card-new">
+                <div class="pricing-header">
+                    <h3 class="plan-title">Free</h3>
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount">0</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="plan-description">Perfect for getting started</p>
+                </div>
+                <div class="pricing-features">
+                    <div class="feature-item">
+                        <div class="feature-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>3 AI generations per day</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>Full gallery access</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>Upload & share images</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>Community forums</span>
+                    </div>
+                </div>
+                <div class="pricing-cta">
+                    {% if is_premium %}
+                    <a href="{% url 'generate_image' %}" class="btn-pricing-outline">Keep Creating</a>
+                    {% elif username %}
+                    <a href="{% url 'generate_image' %}" class="btn-pricing-outline">Start Generating</a>
+                    {% else %}
+                    <button class="btn-pricing-outline" data-bs-toggle="modal" data-bs-target="#registerModal">Get Started Free</button>
+                    {% endif %}
                 </div>
             </div>
 
             <!-- Premium Plan -->
-            <div class="col-12 col-sm-12 col-md-5 col-lg-4">
-                <div class="pricing-card highlight position-relative">
-                    {% if is_premium %}
-                    <div class="badge-popular">Active</div>
-                    {% else %}
-                    <div class="badge-popular">Most popular</div>
-                    {% endif %}
-                    <div class="card-body p-4">
-                        <h3 class="plan-name">Premium</h3>
-                        <div class="price"><span class="amount">$2.99</span><span class="period">/month</span></div>
-                        <p class="subtitle">Unlimited AI generations</p>
-                        <ul class="features">
-                            <li><i class="fa-regular fa-circle-check"></i> Everything in Free</li>
-                            <li><i class="fa-regular fa-circle-check"></i> Unlimited AI image generations</li>
-                            <li><i class="fa-regular fa-circle-check"></i> Priority support</li>
-                        </ul>
-                        <div class="d-grid mt-3">
-                            {% if is_premium %}
-                            <button class="btn btn-secondary" type="button" disabled>You're Premium</button>
-                            {% else %}
-                            <button id="goPremiumButton" class="btn btn-auth" type="button">Go Premium</button>
-                            {% endif %}
-                        </div>
+            <div class="pricing-card-new premium">
+                <div class="popular-badge">{% if is_premium %}Active{% else %}Most Popular{% endif %}</div>
+                <div class="pricing-header">
+                    <h3 class="plan-title">Premium</h3>
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount">2.99</span>
+                        <span class="period">/month</span>
                     </div>
+                    <p class="plan-description">For serious creators</p>
+                </div>
+                <div class="pricing-features">
+                    <div class="feature-item">
+                        <div class="feature-check premium-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span><strong>Unlimited</strong> AI generations</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check premium-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>Everything in Free</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check premium-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>Priority support</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check premium-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>Early access to new features</span>
+                    </div>
+                </div>
+                <div class="pricing-cta">
+                    {% if is_premium %}
+                    <button class="btn-pricing-primary" disabled>You're Premium ✓</button>
+                    {% else %}
+                    <button id="goPremiumButton" class="btn-pricing-primary">
+                        <span>Go Premium</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    </section>
-    <hr class="featurette-divider">
-</div>
+    </div>
+</section>
+
 <!--FOOTER-->
 <footer class="footer-color">
     <div class="container-fluid">
@@ -194,6 +474,75 @@ Homepage
 
 {% block extra_js %}
 <script>
+    // Hero background image slideshow
+    document.addEventListener('DOMContentLoaded', function () {
+        const heroImages = document.querySelectorAll('.hero-bg-image');
+        if (heroImages.length <= 1) return;
+        
+        let currentIndex = 0;
+        const intervalTime = 6000; // Change image every 6 seconds
+        
+        const cycleImages = () => {
+            // Remove active class from current image
+            heroImages[currentIndex].classList.remove('active');
+            
+            // Move to next image
+            currentIndex = (currentIndex + 1) % heroImages.length;
+            
+            // Add active class to next image
+            heroImages[currentIndex].classList.add('active');
+        };
+        
+        // Start the slideshow
+        setInterval(cycleImages, intervalTime);
+    });
+</script>
+<script>
+    // Animated counter for hero stats
+    document.addEventListener('DOMContentLoaded', function () {
+        const counters = document.querySelectorAll('.stat-number[data-count]');
+        
+        const animateCounter = (el) => {
+            const target = parseInt(el.getAttribute('data-count'));
+            const duration = 2000;
+            const start = 0;
+            const startTime = performance.now();
+            
+            const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+            
+            const updateCounter = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeOutQuart(progress);
+                const current = Math.floor(start + (target - start) * easedProgress);
+                
+                el.textContent = current.toLocaleString();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            };
+            
+            requestAnimationFrame(updateCounter);
+        };
+        
+        // Start animation when stats come into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => animateCounter(counter));
+                    statsObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.hero-stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    });
+</script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const sections = document.querySelectorAll('.section');
         if (!('IntersectionObserver' in window)) {
@@ -216,6 +565,34 @@ Homepage
         }, options);
 
         sections.forEach(sec => observer.observe(sec));
+    });
+</script>
+<script>
+    // Scroll animations for new sections
+    document.addEventListener('DOMContentLoaded', function () {
+        // Animate bento cards
+        const bentoCards = document.querySelectorAll('.bento-card');
+        const whyCards = document.querySelectorAll('.why-card');
+        const pricingCards = document.querySelectorAll('.pricing-card-new');
+        
+        const animateOnScroll = (elements, staggerDelay = 0.1) => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('in-view');
+                        }, index * (staggerDelay * 1000));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            
+            elements.forEach(el => observer.observe(el));
+        };
+        
+        animateOnScroll(bentoCards, 0.1);
+        animateOnScroll(whyCards, 0.1);
+        animateOnScroll(pricingCards, 0.15);
     });
 </script>
 <script>

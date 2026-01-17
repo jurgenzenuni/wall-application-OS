@@ -39,10 +39,6 @@
                         href="{% url 'homepage' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/about/' %}active{% endif %}"
-                        href="{% url 'about' %}">About</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link {% if request.path == '/generate_image/' %}active{% endif %}"
                         href="{% url 'generate_image' %}">AI</a>
                 </li>

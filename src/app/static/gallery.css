@@ -5,7 +5,7 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 0;
-  padding-top: 95px;
+  padding-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -23,184 +23,140 @@ body {
 .save-button {
   display: none;
   position: absolute;
-  bottom: 5px;
-  right: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a2e;
   border: none;
-  padding: 5px 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   cursor: pointer;
-  border-radius: 3px;
   z-index: 2;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .save-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-  transition: 0.3s ease-in-out;
+  background: #55bcc9;
 }
 
 .download-button {
   display: none;
   position: absolute;
-  bottom: 5px;
-  right: 58px;
-  /* Adjusted left position */
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  bottom: 12px;
+  right: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a2e;
   border: none;
-  padding: 5px 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   cursor: pointer;
-  border-radius: 3px;
   text-decoration: none;
   z-index: 2;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .download-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-  transition: 0.3s ease-in-out;
+  background: #55bcc9;
 }
 
 .image-container:hover .download-button {
-  display: block;
+  display: flex;
 }
 
 .image-container:hover .save-button {
-  display: block;
+  display: flex;
 }
 
 .image-container {
-  max-width: 1800px;
   position: relative;
-  display: inline-block;
-  margin: 3px 8px;
-  overlay: hidden;
+  border-radius: 12px;
+  overflow: hidden;
   transition: transform 0.3s ease;
-  z-index: 1;
+  margin-bottom: 16px;
+  break-inside: avoid;
 }
 
 /* Image hover effect */
 .image-container:hover {
-  transform: scale(1.03);
-  z-index: 2;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
 }
 
 .image-container img {
   width: 100%;
+  display: block;
   transition: all 0.3s ease;
 }
 
 .image-container::before {
   content: "";
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, 0.3);
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
   z-index: 1;
-  /* transition: opacity 0.3s ease;  */
   opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .image-container:hover::before {
   opacity: 1;
 }
 
-.image-username {
-  margin-left: 5px;
-  position: absolute;
-  bottom: 5px;
-  /* Adjust as needed */
-  left: 5px;
-  /* Adjust as needed */
-  font-size: 24px;
-  /* font-family: "Ubuntu", sans-serif; */
-  font-family: "MuseoModerno", sans-serif;
-  color: white;
-  padding: 5px;
-  cursor: pointer;
-  display: none;
-  /* Initially hide the username */
-  z-index: 2;
-  text-decoration: none;
-  text-shadow: 2px 2px 7px rgba(0, 0, 0, 1);
-}
-
-.image-container:hover .image-username {
-  display: block;
-  /* Show the username when hovering over the image */
-}
+/* Username styling moved to bottom of file */
 
 .bodyclass {
   display: flex;
   justify-content: center;
-  margin: 8px;
-}
-
-@media (min-width: 300px) {
-  .grid {
-    columns: 1;
-    gap: 0px;
-  }
-
-  .grid img {
-    max-width: 100%;
-
-    /* padding-top: 12px !important; */
-  }
-}
-
-@media (min-width: 600px) {
-  .grid {
-    columns: 2;
-    gap: 0px;
-  }
-
-  .grid img {
-    max-width: 100%;
-    /* padding-top: 12px !important; */
-  }
-}
-
-@media (min-width: 900px) {
-  .grid {
-    columns: 3;
-    gap: 0px;
-  }
-
-  /* .grid img {
-        padding-top: 20px !important;
-        } */
-}
-@media (min-width: 1200px) {
-  .grid {
-    columns: 3;
-    gap: 0px;
-  }
-
-  /* .grid img {
-        padding-top: 20px !important;
-        } */
-}
-@media (min-width: 1500px) {
-  .grid {
-    columns: 3;
-    gap: 0px;
-  }
-
-  /* .grid img {
-        padding-top: 20px !important;
-        } */
+  padding: 0 20px;
 }
 
 .grid {
-  justify-content: center;
+  columns: 4;
+  column-gap: 16px;
   max-width: 1500px;
+  width: 100%;
 }
 
-.grid img {
-  width: 600px;
+@media (max-width: 1200px) {
+  .grid {
+    columns: 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    columns: 2;
+    column-gap: 12px;
+  }
+  
+  .image-container {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .grid {
+    columns: 1;
+    column-gap: 0;
+  }
+  
+  .image-container {
+    margin-bottom: 12px;
+    border-radius: 8px;
+  }
+  
+  .bodyclass {
+    padding: 0 10px;
+  }
 }
 
 .loading-icon {
@@ -281,9 +237,9 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* Pull the gallery header up on mobile (top navbar hidden) */
+  /* Mobile: header handles top padding now */
   .gallerytop {
-    padding-top: 16px;
+    padding-top: 10px;
   }
 
   .search-bar {
@@ -296,12 +252,16 @@ body {
     padding: 4px 6px;
     margin-right: 4px;
   }
+  
+  .popular-searches-label {
+    font-size: 11px;
+  }
 }
 
 /* Tablets and small laptops */
 @media (max-width: 992px) and (min-width: 769px) {
   .gallerytop {
-    padding-top: 20px;
+    padding-top: 10px;
   }
 }
 
@@ -320,13 +280,21 @@ body {
 }
 
 .download-button img {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
+  filter: invert(1);
 }
 
 .save-button img {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
+  filter: invert(1);
+}
+
+/* Make icons white when button is hovered (cyan background) */
+.download-button:hover img,
+.save-button:hover img {
+  filter: invert(0);
 }
 /* @media (min-width:900px) {
   .image-username {
@@ -424,7 +392,6 @@ body {
   background-color: #000000;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #topSearchTermsList {
@@ -467,7 +434,6 @@ body {
   width: 80%; /* Adjust width as needed */
   max-width: 500px; /* Maximum width */
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
 }
 
 /* Text Color */
@@ -550,6 +516,124 @@ body {
 /* If you have a homepage-specific style, you might want to add: */
 .homepage-navbar + .gallerytop {
   padding-top: 0; /* Remove padding for homepage if needed */
+}
+
+/* =============================================
+   GALLERY HEADER
+   ============================================= */
+.gallery-header {
+  text-align: center;
+  padding: 100px 24px 20px;
+  background: #f8fafc;
+}
+
+body.dark-mode .gallery-header {
+  background: #0a0a0a;
+}
+
+.gallery-title {
+  font-family: 'MuseoModerno', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+}
+
+body.dark-mode .gallery-title {
+  color: #f1f5f9;
+}
+
+.gallery-title span {
+  color: #55bcc9;
+}
+
+.gallery-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+body.dark-mode .gallery-subtitle {
+  color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+  .gallery-header {
+    padding: 24px 16px 16px;
+  }
+  
+  .gallery-title {
+    font-size: 28px;
+  }
+  
+  .gallery-subtitle {
+    font-size: 14px;
+  }
+}
+
+/* =============================================
+   POPULAR SEARCHES LABEL
+   ============================================= */
+.popular-searches-label {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+body.dark-mode .popular-searches-label {
+  color: #94a3b8;
+}
+
+/* =============================================
+   IMPROVED USERNAME BADGE ON IMAGES
+   ============================================= */
+.image-username {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 3;
+  display: none;
+}
+
+.image-username .username {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-shadow: none;
+}
+
+.image-username .username::before {
+  content: '@';
+  opacity: 0.7;
+}
+
+.image-username .username:hover {
+  background: rgba(85, 188, 201, 0.85);
+  border-color: rgba(85, 188, 201, 0.5);
+  transform: translateY(-2px);
+}
+
+.image-container:hover .image-username {
+  display: block;
 }
 
 /* =============================

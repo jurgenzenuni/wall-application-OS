@@ -1,11 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from .views import homepage, about, gallery, signin, signup, logout_view, serve_profile_picture, get_profile_picture, profile, delete_favorite_image, upload_image, generate_image, support, thread_detail, create_thread, change_thread_status, delete_thread, create_checkout_session, stripe_webhook
+from .views import homepage, gallery, signin, signup, logout_view, serve_profile_picture, get_profile_picture, profile, delete_favorite_image, upload_image, generate_image, support, thread_detail, create_thread, change_thread_status, delete_thread, create_checkout_session, stripe_webhook
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage'),
-    path('about/', about, name='about'),
     path('gallery/', gallery, name='gallery'),
     path('signin/', signin, name='signin'),
     path('signup/', signup, name='signup'),

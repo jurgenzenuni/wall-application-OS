@@ -1,343 +1,372 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head_title %}
-Profile
+{{ username }}'s Profile
 {% endblock head_title %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'profile.css' %}">
 <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
-<style>
-    /* Reduce top gap on mobile when the bottom navbar is active */
-    @media (max-width: 991.98px) {
-        .container.profile-box { padding-top: 6px; }
-        .top-cover { margin-top: 0 !important; }
-        .profile-section { margin-top: 12px !important; }
-    }
-    </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css">
 {% endblock extra_css %}
 
 {% block content %}
 
-<div class="container profile-box">
-    <div class="top-cover">
-        <div class="covwe-inn">
-            <div class="profile-section">
-                {% if username %}
+<div class="profile-page">
+    <!-- Profile Header Section -->
+    <div class="profile-header">
+        <div class="profile-header-bg"></div>
+        <div class="profile-header-content">
+            {% if username %}
+            <div class="profile-avatar-wrapper">
                 {% if pfp_url %}
-                <div class="pfp">
-                    <img id="profilePfpImg" src="{{ pfp_url }}" alt="Profile Picture">
-                    <!-- Only show the edit button if the logged-in user is viewing their own profile -->
+                <div class="profile-avatar">
+                    <img id="profilePfpImg" src="{{ pfp_url }}" alt="{{ username }}'s Profile Picture">
                     {% if logged_in_username == username %}
-                    <div class="edit-button" data-bs-toggle="modal" data-bs-target="#editProfilePictureModal">
-                        <img src="/static/images/camera2.png" style="width: 50px; height: 50px;">
-                    </div>
+                    <button class="avatar-edit-btn" data-bs-toggle="modal" data-bs-target="#editProfilePictureModal">
+                        <i class="fas fa-camera"></i>
+                    </button>
                     {% endif %}
                 </div>
                 {% else %}
-                <p>No profile picture available.</p>
+                <div class="profile-avatar no-image">
+                    <i class="fas fa-user"></i>
+                </div>
                 {% endif %}
-                <div class="username">{{ username }}</div>
+            </div>
+            
+            <div class="profile-info">
+                <h1 class="profile-username">{{ username }}</h1>
+                {% if logged_in_username == username %}
+                <span class="profile-badge own-profile">
+                    <i class="fas fa-check-circle"></i> Your Profile
+                </span>
+                {% else %}
+                <span class="profile-badge viewing-profile">
+                    <i class="fas fa-eye"></i> Viewing Profile
+                </span>
                 {% endif %}
-            </div> <!-- profile-section -->
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number">{{ uploaded_images|length }}</span>
+                    <span class="stat-label">Uploads</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">{{ favorite_images|length }}</span>
+                    <span class="stat-label">Favorites</span>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 
-    <!-- Modal structure for editing profile picture -->
+    <!-- Profile Content -->
+    <div class="profile-content">
+        <!-- Tab Navigation -->
+        <div class="profile-tabs-wrapper">
+            <ul class="profile-tabs" id="myTab" role="tablist">
+                <li class="tab-item" role="presentation">
+                    <button class="tab-btn active" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
+                        type="button" role="tab" aria-controls="reviews" aria-selected="true">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Uploads</span>
+                    </button>
+                </li>
+                <li class="tab-item" role="presentation">
+                    <button class="tab-btn" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="false">
+                        <i class="fas fa-heart"></i>
+                        <span>Favorites</span>
+                    </button>
+                </li>
+                {% if logged_in_username == username %}
+                <li class="tab-item" role="presentation">
+                    <button class="tab-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                        type="button" role="tab" aria-controls="profile" aria-selected="false">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Share</span>
+                    </button>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="myTabContent">
+            <!-- Uploads Tab -->
+            <div class="tab-pane fade active show" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                <div class="gallery-grid-wrapper">
+                    {% if uploaded_images %}
+                    <div class="gallery-grid">
+                        {% for image in uploaded_images %}
+                        <div class="gallery-item">
+                            <img src="{{ image.url }}" alt="Uploaded Image">
+                            <div class="gallery-item-overlay">
+                                <a href="#" class="gallery-action download" onclick="fetchAndDownload('{{ image.url }}'); return false;" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3>No uploads yet</h3>
+                        {% if logged_in_username == username %}
+                        <p>Share your first image with the community in the 'Share' tab!</p>
+                        {% else %}
+                        <p>This user hasn't uploaded any images yet.</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Favorites Tab -->
+            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="gallery-grid-wrapper">
+                    {% if favorite_images %}
+                    <div class="gallery-grid">
+                        {% for image in favorite_images %}
+                        <div class="gallery-item">
+                            <img src="{{ image.url }}" alt="Favorite Image">
+                            <div class="gallery-item-overlay">
+                                <a href="#" class="gallery-action download" onclick="fetchAndDownload('{{ image.url }}'); return false;" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                {% if logged_in_username == username %}
+                                <button class="gallery-action delete" onclick="deleteImage('{{ image.key }}', this)" title="Remove from favorites">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>No favorites yet</h3>
+                        {% if logged_in_username == username %}
+                        <p>Browse the gallery and save images you love!</p>
+                        {% else %}
+                        <p>This user hasn't saved any favorites yet.</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Share/Upload Tab (Only for own profile) -->
+            {% if logged_in_username == username %}
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="upload-section">
+                    <div class="upload-card">
+                        <div class="upload-card-header">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Share Your Image</h3>
+                            <p>Contribute to our community gallery</p>
+                        </div>
+                        <form method="POST" enctype="multipart/form-data" action="{% url 'upload_image' %}" class="upload-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="image">
+                                    <i class="fas fa-image"></i> Choose an image
+                                </label>
+                                <input type="file" id="image" name="image" accept="image/*" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">
+                                    <i class="fas fa-tags"></i> Keywords (comma separated)
+                                </label>
+                                <input type="text" id="description" name="description" placeholder="nature, sunset, mountains..." required>
+                            </div>
+                            <button class="upload-submit-btn" type="submit">
+                                <i class="fas fa-upload"></i> Upload Image
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal for editing profile picture -->
     <div class="modal fade" id="editProfilePictureModal" tabindex="-1" aria-labelledby="editProfilePictureModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editProfilePictureModalLabel">Upload</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content auth-modal">
+                <button type="button" class="auth-modal-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="auth-modal-body">
+                    <h2 class="auth-modal-title">Update Avatar</h2>
+                    <p class="auth-modal-subtitle">Choose a new profile picture</p>
+                    
                     <form id="pfpForm" action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="newProfilePicture" class="form-label">Select new profile picture:</label>
-                            <input type="file" class="form-control" id="newProfilePicture" name="newProfilePicture" accept="image/*" required>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <input type="file" class="auth-form-input" id="newProfilePicture" name="newProfilePicture" accept="image/*" required style="padding: 12px;">
                         </div>
                         <!-- Cropping area (hidden until file chosen) -->
-                        <div id="cropArea" style="display:none">
-                            <div style="width:100%; max-height:400px; overflow:hidden">
+                        <div id="cropArea" style="display:none; margin-bottom: 20px;">
+                            <div style="width:100%; max-height:300px; overflow:hidden; border-radius: 12px;">
                                 <img id="cropImage" alt="Crop preview" style="max-width:100%">
                             </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-outline-secondary btn-sm" type="button" id="zoomIn">+</button>
-                                    <button class="btn btn-outline-secondary btn-sm" type="button" id="zoomOut">-</button>
-                                    <button class="btn btn-outline-secondary btn-sm" type="button" id="rotateLeft">↺</button>
-                                    <button class="btn btn-outline-secondary btn-sm" type="button" id="rotateRight">↻</button>
-                                    <button class="btn btn-outline-secondary btn-sm" type="button" id="resetCrop">Reset</button>
-                                </div>
-                                <small class="text-muted">Crop will be a perfect circle</small>
+                            <div class="crop-controls">
+                                <button class="crop-btn" type="button" id="zoomIn"><i class="fas fa-plus"></i></button>
+                                <button class="crop-btn" type="button" id="zoomOut"><i class="fas fa-minus"></i></button>
+                                <button class="crop-btn" type="button" id="rotateLeft"><i class="fas fa-undo"></i></button>
+                                <button class="crop-btn" type="button" id="rotateRight"><i class="fas fa-redo"></i></button>
+                                <button class="crop-btn" type="button" id="resetCrop"><i class="fas fa-sync"></i></button>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-3">
-                            <button type="submit" class="btn btn-auth" id="uploadBtn" disabled>Save</button>
-                        </div>
+                        <button type="submit" class="auth-modal-submit" id="uploadBtn" disabled>
+                            <i class="fas fa-save"></i> Save Avatar
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <ul class="nav nav-tabs custom-nav-tabs" id="myTab" role="tablist" style="margin-left:5px; margin-top:10px;">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link tab-item active" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
-                type="button" role="tab" aria-controls="reviews" aria-selected="false">Uploads</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link tab-item " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                role="tab" aria-controls="home" aria-selected="true">Favorites</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link tab-item" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                type="button" role="tab" aria-controls="profile" aria-selected="false">Share</button>
-        </li>
-    </ul>
-
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="bodyclass">
-                <div class="grid">
-                    {% if favorite_images %}
-                    {% for image in favorite_images %}
-                    <div class="image-container">
-                        <img src="{{ image.url }}" alt="Favorite Image">
-                        <div class="download-button">
-                            <a href="#" onclick="fetchAndDownload('{{ image.url }}'); return false;">
-                                <img src="{% static 'images/download.png' %}" alt="Download" class="icon">
-                            </a>
-                        </div>
-                        <!-- Only show the delete button if the logged-in user is viewing their own profile -->
-                        {% if logged_in_username == username %}
-                        <div class="delete-button">
-                            <img src="{% static 'images/delete.png' %}" alt="Delete" class="icon"
-                                onclick="deleteImage('{{ image.key }}', this)">
-                        </div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    <p>No favorites found.</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <!-- Only show the upload form if the logged-in user is viewing their own profile -->
-            {% if logged_in_username == username %}
-            <form method="POST" enctype="multipart/form-data" action="{% url 'upload_image' %}">
-                {% csrf_token %}
-                <label style="margin-top: 15px; margin-bottom: 15px;" for="image">Choose an image:</label>
-                <input type="file" id="image" name="image" accept="image/*" required><br><br>
-                <label for="description">Enter Keywords(comma separated):</label>
-                <input type="text" id="description" name="description" required><br><br>
-                <button class="btn btn-auth" type="submit">Upload</button>
-            </form>
-            {% else %}
-            <p> Not Authorized </p>
-            {% endif %}
-        </div>
-
-        <div class="tab-pane fade active show" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-            <div class="bodyclass">
-                <div class="grid">
-                    {% if uploaded_images %}
-                    {% for image in uploaded_images %}
-                    <div class="image-container">
-                        <img src="{{ image.url }}" alt="Uploaded Image">
-                        <div class="download-button2">
-                            <a href="#" onclick="fetchAndDownload('{{ image.url }}'); return false;">
-                                <img src="{% static 'images/download.png' %}" alt="Download" class="icon">
-                            </a>
-                        </div>
-                        <!-- Only show the delete button if the logged-in user is viewing their own profile -->
-                        <!-- {% if logged_in_username == username %}
-                      <div class="delete-button">
-                        <img src="{% static 'images/delete.png' %}" alt="Delete" class="icon" onclick="deleteImage('{{ image.key }}', this)">
-                      </div>
-                    {% endif %} -->
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    <p>No uploaded images found. Contribute some images in the 'Share' tab and they will appear here!
-                    </p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+</div>
         {% endblock content %}
 
-        {% block extra_js %}
-        <script>
-            function openTab(evt, tabName) {
-                // Declare all variables
-                var i, tabcontent, tablinks;
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
+<script>
+    // Profile Picture Cropping & Upload
+    (function(){
+        const fileInput = document.getElementById('newProfilePicture');
+        const cropArea = document.getElementById('cropArea');
+        const cropImg = document.getElementById('cropImage');
+        const form = document.getElementById('pfpForm');
+        const uploadBtn = document.getElementById('uploadBtn');
+        let cropper = null;
 
-                // Get all elements with class="tabcontent" and hide them
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                    tabcontent[i].classList.remove("active");
-                }
+        function enableActions(enabled){
+            uploadBtn.disabled = !enabled;
+        }
 
-                // Get all elements with class="tablinks" and remove the class "active"
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-
-                // Show the current tab, and add an "active" class to the button that opened the tab
-                document.getElementById(tabName).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
-
-            // Display the default active tab content
-            document.addEventListener("DOMContentLoaded", function () {
-                var defaultTab = document.querySelector(".tabcontent.active");
-                if (defaultTab) {
-                    defaultTab.style.display = "block";
-                }
+        fileInput.addEventListener('change', function(){
+            const file = this.files && this.files[0];
+            if(!file) return;
+            const url = URL.createObjectURL(file);
+            cropImg.src = url;
+            cropArea.style.display = 'block';
+            if(cropper){ cropper.destroy(); }
+            cropper = new Cropper(cropImg, {
+                viewMode: 1,
+                aspectRatio: 1,
+                dragMode: 'move',
+                autoCropArea: 1,
+                responsive: true,
+                background: false,
             });
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
-        <script>
-            // Profile Picture Cropping & Upload
-            (function(){
-                const fileInput = document.getElementById('newProfilePicture');
-                const cropArea = document.getElementById('cropArea');
-                const cropImg = document.getElementById('cropImage');
-                const form = document.getElementById('pfpForm');
-                const uploadBtn = document.getElementById('uploadBtn');
-                let cropper = null;
+            enableActions(true);
+        });
 
-                function enableActions(enabled){
-                    uploadBtn.disabled = !enabled;
-                }
+        document.getElementById('zoomIn').addEventListener('click', ()=> cropper && cropper.zoom(0.1));
+        document.getElementById('zoomOut').addEventListener('click', ()=> cropper && cropper.zoom(-0.1));
+        document.getElementById('rotateLeft').addEventListener('click', ()=> cropper && cropper.rotate(-90));
+        document.getElementById('rotateRight').addEventListener('click', ()=> cropper && cropper.rotate(90));
+        document.getElementById('resetCrop').addEventListener('click', ()=> cropper && cropper.reset());
 
-                fileInput.addEventListener('change', function(){
-                    const file = this.files && this.files[0];
-                    if(!file) return;
-                    const url = URL.createObjectURL(file);
-                    cropImg.src = url;
-                    cropArea.style.display = 'block';
-                    // Initialize cropper for a square crop (we'll mask as circle in CSS when displayed)
-                    if(cropper){ cropper.destroy(); }
-                    cropper = new Cropper(cropImg, {
-                        viewMode: 1,
-                        aspectRatio: 1,
-                        dragMode: 'move',
-                        autoCropArea: 1,
-                        responsive: true,
-                        background: false,
-                    });
-                    enableActions(true);
-                });
+        form.addEventListener('submit', async function(e){
+            if(!cropper) return;
+            e.preventDefault();
+            try {
+                const canvas = cropper.getCroppedCanvas({ width: 512, height: 512 });
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png', 0.95));
+                const fd = new FormData();
+                fd.append('csrfmiddlewaretoken', form.querySelector('[name=csrfmiddlewaretoken]').value);
+                fd.append('newProfilePicture', blob, 'avatar.png');
 
-                // Simple controls
-                document.getElementById('zoomIn').addEventListener('click', ()=> cropper && cropper.zoom(0.1));
-                document.getElementById('zoomOut').addEventListener('click', ()=> cropper && cropper.zoom(-0.1));
-                document.getElementById('rotateLeft').addEventListener('click', ()=> cropper && cropper.rotate(-90));
-                document.getElementById('rotateRight').addEventListener('click', ()=> cropper && cropper.rotate(90));
-                document.getElementById('resetCrop').addEventListener('click', ()=> cropper && cropper.reset());
-
-                // Intercept submit to send cropped image via AJAX
-                form.addEventListener('submit', async function(e){
-                    if(!cropper) return; // fallback to default behavior if no cropper
-                    e.preventDefault();
-                    try {
-                        // Export as PNG at 512x512 for profile avatar
-                        const canvas = cropper.getCroppedCanvas({ width: 512, height: 512 });
-                        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png', 0.95));
-                        const fd = new FormData();
-                        fd.append('csrfmiddlewaretoken', form.querySelector('[name=csrfmiddlewaretoken]').value);
-                        fd.append('newProfilePicture', blob, 'avatar.png');
-
-                        const resp = await fetch(form.action, {
-                            method: 'POST',
-                            body: fd,
-                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                        });
-                        const data = await resp.json();
-                        if(!resp.ok || !data.success){
-                            throw new Error(data.message || 'Upload failed');
-                        }
-                        // Close modal and refresh avatar
-                        const modalEl = document.getElementById('editProfilePictureModal');
-                        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-                        modal.hide();
-                        // Force PFP refresh by cache-busting (navbar + profile image)
-                        const targets = document.querySelectorAll('img[src*="/profile-picture/"], img[src*="/profile_picture/"], #profilePfpImg');
-                        targets.forEach(img => {
-                            const u = new URL(img.src, window.location.origin);
-                            u.searchParams.set('t', Date.now());
-                            img.src = u.toString();
-                        });
-                    } catch (err){
-                        alert(err.message || 'Something went wrong');
-                    }
-                });
-            })();
-        </script>
-        <script>
-            function fetchAndDownload(imageUrl) {
-                fetch(imageUrl, {
-                    method: 'GET',
-                    headers: { 'Cache-Control': 'no-cache' }
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.blob();
-                        } else {
-                            throw new Error('Network response was not ok.');
-                        }
-                    })
-                    .then(blob => {
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = imageUrl.split('/').pop(); // Extract the filename from the URL
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        URL.revokeObjectURL(url);
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
-            }
-            function deleteImage(imageKey, imageElement) {
-                fetch("{% url 'delete_favorite_image' %}", {
+                const resp = await fetch(form.action, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-CSRFToken': '{{ csrf_token }}'
-                    },
-                    body: new URLSearchParams({
-                        'image_key': imageKey
-                    })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Remove the specific image container associated with the deleted image
-                            imageElement.closest('.image-container').remove();
-                        } else {
-                            alert('Failed to delete image: ' + (data.error || 'Unknown error'));
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while deleting the image.');
-                    });
+                    body: fd,
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                const data = await resp.json();
+                if(!resp.ok || !data.success){
+                    throw new Error(data.message || 'Upload failed');
+                }
+                const modalEl = document.getElementById('editProfilePictureModal');
+                const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                modal.hide();
+                const targets = document.querySelectorAll('img[src*="/profile-picture/"], img[src*="/profile_picture/"], #profilePfpImg');
+                targets.forEach(img => {
+                    const u = new URL(img.src, window.location.origin);
+                    u.searchParams.set('t', Date.now());
+                    img.src = u.toString();
+                });
+            } catch (err){
+                alert(err.message || 'Something went wrong');
             }
-        </script>
-
-        {% endblock extra_js %}
+        });
+    })();
+</script>
+<script>
+    function fetchAndDownload(imageUrl) {
+        fetch(imageUrl, {
+            method: 'GET',
+            headers: { 'Cache-Control': 'no-cache' }
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = imageUrl.split('/').pop();
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+    
+    function deleteImage(imageKey, imageElement) {
+        fetch("{% url 'delete_favorite_image' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: new URLSearchParams({
+                'image_key': imageKey
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    imageElement.closest('.gallery-item').remove();
+                } else {
+                    alert('Failed to delete image: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the image.');
+            });
+    }
+</script>
+{% endblock extra_js %}

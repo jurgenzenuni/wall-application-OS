@@ -1,3 +1,60 @@
+/* =============================================
+   AI PAGE HEADER
+   ============================================= */
+.ai-header {
+  text-align: center;
+  padding: 100px 24px 20px;
+  background: linear-gradient(180deg, #f8fafc 0%, transparent 100%);
+}
+
+body.dark-mode .ai-header {
+  background: linear-gradient(180deg, #0a0a0a 0%, transparent 100%);
+}
+
+.ai-title {
+  font-family: 'MuseoModerno', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+}
+
+body.dark-mode .ai-title {
+  color: #f1f5f9;
+}
+
+.ai-title span {
+  color: #55bcc9;
+}
+
+.ai-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+body.dark-mode .ai-subtitle {
+  color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+  .ai-header {
+    padding: 24px 16px 16px;
+  }
+  
+  .ai-title {
+    font-size: 28px;
+  }
+  
+  .ai-subtitle {
+    font-size: 14px;
+  }
+}
+
+/* =============================================
+   AI CONTAINER & CONTENT
+   ============================================= */
 .ai-text {
   background-color: #000000;
   color: white;
@@ -8,15 +65,9 @@
 }
 .ai-container {
   max-width: 900px;
-  margin: 72px auto 28px;
+  margin: 0 auto 28px;
   padding: 20px;
   text-align: center;
-}
-.ai-title {
-  font-family: "MuseoModerno", sans-serif;
-  font-size: 48px;
-  margin-bottom: 30px;
-  color: #000;
 }
 .ai-description {
   font-size: 16px;

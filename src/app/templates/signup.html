@@ -1,34 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="post">
-        <h2 class="title2">Register</h2> {{ msg }}
-        {% csrf_token %}
-      
-        <label for="firstname"></label>
-        <input type="text" placeholder="John" name="firstname" id="firstname">
-      
-        <label for="lastname"></label>
-        <input type="text" placeholder="Smith" name="lastname" id="lastname">
-      
-        <label for="username"></label>
-        <input type="text" id="username" name="username" required placeholder="Username"><br><br>
-      
-        <label for="email"></label>
-        <input type="email" placeholder="Email or Phone" name="email" id="email">
-      
-        <label for="password1"></label>
-        <input type="password" id="password1" name="password1" required placeholder="Password">
-      
-        <label for="password2"></label>
-        <input type="password" id="password2" name="password2" required placeholder="Confirm your password">
-      
-        <button type="submit" class="button">Sign up</button>
-      </form>
-</body>
-</html> 
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/auth.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-page">
+    <!-- Logo -->
+    <header class="auth-header">
+        <a href="{% url 'homepage' %}" class="logo">
+            <img src="/static/images/wlogo4.png" alt="Wallify">
+        </a>
+    </header>
+
+    <!-- Register Card -->
+    <div class="auth-card">
+        <h1 class="auth-title">Create Account</h1>
+        <p class="auth-subtitle">Join Wallify today</p>
+
+        {% if msg %}
+        <div class="auth-message error">{{ msg }}</div>
+        {% endif %}
+
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            
+            <div class="form-group row">
+                <div class="form-field">
+                    <label class="form-label" for="firstname">First Name</label>
+                    <input 
+                        type="text" 
+                        id="firstname" 
+                        name="firstname" 
+                        class="form-input" 
+                        placeholder="John"
+                        autocomplete="given-name"
+                    >
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="lastname">Last Name</label>
+                    <input 
+                        type="text" 
+                        id="lastname" 
+                        name="lastname" 
+                        class="form-input" 
+                        placeholder="Smith"
+                        autocomplete="family-name"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="form-input" 
+                    placeholder="Choose a username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="form-input" 
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password1">Password</label>
+                <input 
+                    type="password" 
+                    id="password1" 
+                    name="password1" 
+                    class="form-input" 
+                    placeholder="Create a password"
+                    required
+                    autocomplete="new-password"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password2">Confirm Password</label>
+                <input 
+                    type="password" 
+                    id="password2" 
+                    name="password2" 
+                    class="form-input" 
+                    placeholder="Confirm your password"
+                    required
+                    autocomplete="new-password"
+                >
+            </div>
+
+            <button type="submit" class="auth-submit">Create Account</button>
+        </form>
+
+        <div class="auth-footer">
+            <span class="auth-footer-text">Already have an account?</span>
+            <a href="{% url 'signin' %}" class="auth-footer-link">Sign in</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} 

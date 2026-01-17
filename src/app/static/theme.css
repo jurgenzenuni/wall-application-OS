@@ -48,24 +48,37 @@ body.dark-mode .navbar.navbar-scrolled {
 body.dark-mode .navbar .nav-link {
   color: rgba(255, 255, 255, 0.8) !important;
 }
-body.dark-mode .navbar .nav-link:hover,
+body.dark-mode .navbar .nav-link {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+body.dark-mode .navbar .nav-link:hover {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
 body.dark-mode .navbar .nav-link.active {
   color: #ffffff !important;
 }
 body.dark-mode .navbar .navbar-brand-wallify {
   color: #ffffff;
 }
-/* Force white underline in dark mode (desktop and scrolled) */
+/* Nav link hover background in dark mode */
 @media (min-width: 992px) {
+  body.dark-mode .navbar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  body.dark-mode .navbar .nav-link.active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
   body.dark-mode .nav-link::after,
   body.dark-mode .navbar-scrolled .nav-link::after {
-    background-color: rgba(255, 255, 255, 0.7) !important;
+    background-color: #55bcc9 !important;
   }
   body.dark-mode .nav-link:hover::after,
   body.dark-mode .nav-link.active::after,
   body.dark-mode .navbar-scrolled .nav-link:hover::after,
   body.dark-mode .navbar-scrolled .nav-link.active::after {
-    background-color: #ffffff !important;
+    background-color: #55bcc9 !important;
   }
 }
 body.dark-mode .hamburger-menu span {
@@ -90,7 +103,7 @@ body.dark-mode .btn-auth:hover {
 }
 body.dark-mode .btn-outline-auth {
   color: #ffffff;
-  border-color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 body.dark-mode .btn-outline-auth:hover {
   background: #55bcc9;

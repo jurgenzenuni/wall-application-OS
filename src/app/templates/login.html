@@ -1,33 +1,66 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="/static/auth.css">
+{% endblock %}
+
 {% block content %}
 
-<header class="header">
-    <div class="logo logomargins">
-        <a href="{% url 'homepage' %}">
-            <img src="/static/images/wlogo4.png" alt="Logo">
+<div class="auth-page">
+    <!-- Logo -->
+    <header class="auth-header">
+        <a href="{% url 'homepage' %}" class="logo">
+            <img src="/static/images/wlogo4.png" alt="Wallify">
         </a>
+    </header>
+
+    <!-- Login Card -->
+    <div class="auth-card">
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to your account</p>
+
+        {% if msg %}
+        <div class="auth-message error">{{ msg }}</div>
+        {% endif %}
+
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="form-input" 
+                    placeholder="Enter your username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    class="form-input" 
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit" class="auth-submit">Sign In</button>
+        </form>
+
+        <div class="auth-footer">
+            <span class="auth-footer-text">Don't have an account?</span>
+            <a href="{% url 'signup' %}" class="auth-footer-link">Sign up</a>
+        </div>
     </div>
-</header>
-
-<!-- <h2>Login</h2> {{ msg }} -->
-<form class="formlogin" method="post">
-    <h2 class="title2">Login</h2> {{ msg }}
-    {% csrf_token %}
-    <!-- {{ form.as_p }} -->
-    <label for="username"></label>
-    <input type="text" id="username" name="username" required placeholder="Enter Username"><br><br>
-
-    <label for="password"></label>
-    <input type="password" id="password" name="password" required placeholder="Enter Password"><br><br>
-
-    <button type="submit" class="buttonlogin">Login</button>
-
-    <p class="fyp2">
-        <span class="fyp2-text">Don't have an account?</span>
-        <a href="{% url 'signup' %}" class="signup-btn">Sign up</a>
-    </p>
-</form>
+</div>
 
 {% endblock content %}
 
