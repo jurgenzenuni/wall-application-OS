@@ -101,7 +101,7 @@
 }
 
 .profile-username {
-  font-family: 'MuseoModerno', sans-serif;
+  font-family: "MuseoModerno", sans-serif;
   font-size: 2.2rem;
   font-weight: 700;
   color: #1a1a2e;
@@ -141,7 +141,7 @@
 
 .stat-number {
   display: block;
-  font-family: 'MuseoModerno', sans-serif;
+  font-family: "MuseoModerno", sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
   color: #55bcc9;
@@ -271,7 +271,7 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
   opacity: 0;
   transition: all 0.3s ease;
 }
@@ -336,7 +336,7 @@
 }
 
 .empty-state h3 {
-  font-family: 'MuseoModerno', sans-serif;
+  font-family: "MuseoModerno", sans-serif;
   font-size: 1.4rem;
   color: #666;
   margin-bottom: 10px;
@@ -373,7 +373,7 @@
 }
 
 .upload-card-header h3 {
-  font-family: 'MuseoModerno', sans-serif;
+  font-family: "MuseoModerno", sans-serif;
   font-size: 1.5rem;
   color: #1a1a2e;
   margin-bottom: 8px;
@@ -653,7 +653,7 @@ body.dark-mode .crop-btn:hover {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .profile-stats {
     gap: 16px;
   }
