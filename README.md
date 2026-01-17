@@ -1,28 +1,37 @@
-# wall-application-OS
+# Wallify
 
-I need a skilled Python developer to create an Wallpaper image sharing platform with the following key features:
-- Python Mandatory, not interested in React or other frameworks.
+I built this app was originally for a client and maintain it here as a local fork. I recently updated the UI to modernize the look and improve mobile behavior. Original Version can be viewed here https://github.com/liamCarra/wall-application-OS
 
-User Account Management:
-- Account creation and basic profile customization (name, bio)
-- Custom User "Folders", showcasing images the user uploaded and saved.
+## Features
 
-Image Sharing:
-- Ability to upload images from device
+- User accounts with basic profile customisation
+- Image uploads and gallery browsing
+- Favorites / save images
+- Simple forums / threads (support)
+- AI image generation interface (generates wallpapers in different aspect ratios)
+- Responsive UI with dark mode support
+- Image download and sharing actions
 
-AI Features:
-- Would be nice if you could implement the ability to generate AI Images using some sort of library in either landscape or portrait sizes
+## Screenshots
 
-Image Viewing:
-- Categorization of images into albums or categories
+Below are a few screenshots of the app UI (stored in `src/app/static/images/ui/`). Click any image to view it full-size on GitHub.
 
-Ideal Skills and Experience:
-- Proficiency in Python and web development
-- Experience with SQL database management
-- Knowledge of user authentication and image upload functionalities
-- UI/UX design skills are a plus for better user experience
+- Home (hero):
 
-Please provide examples of similar work done.
+	![Home UI](src/app/static/images/ui/homeui.png)
 
-Contact me Below 
-https://www.reddit.com/user/One_Addendum2127/
+- More Home:
+
+	![Home UI 2](src/app/static/images/ui/homeui2.png)
+
+- Gallery:
+
+	![Gallery UI](src/app/static/images/ui/galleryui.png)
+
+- Profile:
+
+	![Profile UI](src/app/static/images/ui/profui.png)
+
+- AI Generator:
+
+	![AI UI](src/app/static/images/ui/aiui.png)
