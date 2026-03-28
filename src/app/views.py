@@ -470,25 +470,16 @@ def generate_image(request):
 
         try:
             output = replicate.run(
-                # "stability-ai/sdxl:7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc",
-                "bytedance/seedream-3",
-                # "bytedance/hyper-flux-16step:382cf8959fb0f0d665b26e7e80b8d6dc3faaef1510f14ce017e8c732bb3d1eb7",
+                "bytedance/seedream-4.5",
                 input={
-                    "size": "regular",
-                    "width": 2048,
-                    "height": 2048,
+                    "size": "4K",
+                    # "width": 2048,
+                    # "height": 2048,
+                    "max_images": 1,
                     "prompt": prompt,
                     "aspect_ratio": aspect_ratio,
-                    "guidance_scale": 2.5
-                    # "width": 1440,
-                    # "height": 1440,
-                    # "prompt": prompt,
-                    # "num_outputs": 1,
-                    # "aspect_ratio": aspect_ratio, 
-                    # "output_format": "jpg",
-                    # "guidance_scale": 3.5,
-                    # "output_quality": 100,
-                    # "num_inference_steps": 16,
+                    "sequential_image_generation": "disabled"
+                    # "guidance_scale": 2.5
                 }
             )
             
