@@ -17,8 +17,7 @@ ALLOWED_HOSTS = [
     ".onrender.com",
     "render-deploy-aafu.onrender.com",
     "scenary.site",
-    "www.scenary.site",
-    "https://scenary.site"
+    "www.scenary.site"
 ]
 
 if DEBUG:
@@ -148,12 +147,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Add these settings for contact form to avoid CRSF Token issues
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.railway.app",  # Allow Railway domain
+    "https://*.railway.app",
     "http://localhost:8000",
     "https://wallify.onrender.com",
-    "scenary.site",
-    "www.scenary.site",
-    "https://scenary.site"
+    "https://scenary.site",
+    "https://www.scenary.site"
 ]
 
 # Security settings
