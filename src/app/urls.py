@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from .views import homepage, gallery, signin, signup, logout_view, serve_profile_picture, get_profile_picture, profile, delete_favorite_image, upload_image, generate_image, support, thread_detail, create_thread, change_thread_status, delete_thread, create_checkout_session, stripe_webhook, TemplateView
+from django.views.generic import TemplateView
+from .views import homepage, gallery, signin, signup, logout_view, serve_profile_picture, get_profile_picture, profile, delete_favorite_image, upload_image, generate_image, support, thread_detail, create_thread, change_thread_status, delete_thread, create_checkout_session, stripe_webhook
 
 urlpatterns = [
     path('admin/', admin.site.urls),
