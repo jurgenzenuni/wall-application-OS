@@ -15,7 +15,10 @@ DEBUG = os.getenv('DEBUG', default=False)
 ALLOWED_HOSTS = [
     ".railway.app",
     ".onrender.com",
-    "render-deploy-aafu.onrender.com"
+    "render-deploy-aafu.onrender.com",
+    "scenary.site",
+    "www.scenary.site",
+    "https://scenary.site"
 ]
 
 if DEBUG:
