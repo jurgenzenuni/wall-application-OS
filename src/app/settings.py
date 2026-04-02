@@ -145,9 +145,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Add these settings for contact form to avoid CRSF Token issues
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.railway.app",  # Allow your Railway domain
+    "https://*.railway.app",  # Allow Railway domain
     "http://localhost:8000",
-    "https://wallify.onrender.com"  # For local development
+    "https://wallify.onrender.com",
+    "scenary.site",
+    "www.scenary.site",
+    "https://scenary.site"
 ]
 
 # Security settings
