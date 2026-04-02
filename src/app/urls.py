@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import homepage, gallery, signin, signup, logout_view, serve_profile_picture, get_profile_picture, profile, delete_favorite_image, upload_image, generate_image, support, thread_detail, create_thread, change_thread_status, delete_thread, create_checkout_session, stripe_webhook
+from .views import homepage, gallery, signin, signup, logout_view, serve_profile_picture, get_profile_picture, profile, delete_favorite_image, upload_image, generate_image, support, thread_detail, create_thread, change_thread_status, delete_thread, create_checkout_session, stripe_webhook, TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     # Stripe billing
     path('billing/checkout', create_checkout_session, name='create_checkout_session'),
     path('stripe/webhook', stripe_webhook, name='stripe_webhook'),
+    path('google66235b9addae6fa9.html', TemplateView.as_view(template_name='google66235b9addae6fa9.html', content_type='text/html')),
 ]
