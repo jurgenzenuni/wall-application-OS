@@ -437,6 +437,8 @@ def generate_image(request):
 
         prompt = request.POST.get('prompt')
         aspect_ratio = request.POST.get('aspect_ratio', '9:16')
+        if aspect_ratio not in {'9:16', '16:9'}:
+            aspect_ratio = '9:16'
 
         # Determine premium flag (0/1)
         is_premium = bool(request.session.get('is_premium', False))
@@ -470,16 +472,12 @@ def generate_image(request):
 
         try:
             output = replicate.run(
-                "bytedance/seedream-4.5",
+                "google/nano-banana-2",
                 input={
-                    "size": "4K",
-                    # "width": 2048,
-                    # "height": 2048,
-                    "max_images": 1,
                     "prompt": prompt,
                     "aspect_ratio": aspect_ratio,
-                    "sequential_image_generation": "disabled"
-                    # "guidance_scale": 2.5
+                    "resolution": "4K",
+                    "output_format": "png"
                 }
             )
             
@@ -489,6 +487,10 @@ def generate_image(request):
                     # Case 1: direct string URL
                     if isinstance(o, str):
                         return o
+                    # Replicate FileOutput objects expose their temporary URL here.
+                    output_url = getattr(o, "url", None)
+                    if output_url:
+                        return str(output_url)
                     # Case 2: list/tuple of URLs or dicts
                     if isinstance(o, (list, tuple)) and len(o) > 0:
                         first = o[0]
