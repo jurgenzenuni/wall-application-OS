@@ -1,5 +1,8 @@
 venv/
 
+# Local image import batches
+/image_import/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

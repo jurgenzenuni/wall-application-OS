@@ -7,7 +7,6 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth import logout
 import boto3
 from django.conf import settings
-import io
 import os
 from django.http import JsonResponse
 import requests
@@ -22,7 +21,7 @@ from .models import SupportThread, ThreadMessage
 from django.core.paginator import Paginator
 from django.db.models import Q
 from typing import Any, Optional
-from PIL import Image, ImageOps
+from .image_utils import convert_image_to_jpeg
 
 def homepage(request):
     username = request.session.get('username')
@@ -373,18 +372,7 @@ def upload_image(request):
         # Convert uploads to JPEG and use a unique filename within the images/ bucket folder.
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
         db_file_name = f"{uuid.uuid4().hex}.jpg"
-        with Image.open(uploaded_file) as source_image:
-            image = ImageOps.exif_transpose(source_image)
-            if "A" in image.getbands() or "transparency" in image.info:
-                rgba_image = image.convert("RGBA")
-                jpeg_image = Image.new("RGB", rgba_image.size, "white")
-                jpeg_image.paste(rgba_image, mask=rgba_image.getchannel("A"))
-            else:
-                jpeg_image = image.convert("RGB")
-
-            jpeg_content = io.BytesIO()
-            jpeg_image.save(jpeg_content, format="JPEG", quality=95, optimize=True)
-            file_content = jpeg_content.getvalue()
+        file_content = convert_image_to_jpeg(uploaded_file)
         
         # Upload the file to S3
         s3.put_object(Bucket=bucket_name,
