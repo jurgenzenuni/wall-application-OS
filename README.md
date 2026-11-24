@@ -1,4 +1,4 @@
-# Wallify
+# Scenary
 
 I built this app was originally for a client and maintain it here as a local fork. I recently updated the UI to modernize the look and improve mobile behavior. Original Version can be viewed here https://github.com/liamCarra/wall-application-OS
 
